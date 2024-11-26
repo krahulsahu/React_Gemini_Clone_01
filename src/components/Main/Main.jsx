@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Main.css";
 import { assets } from "../../assets/assets";
 import { Context } from "../../context/Context";
 
 const Main = () => {
+  const [theme, setTheme] = useState("light");
   const {
     onSent,
     recentPrompt,
@@ -13,6 +14,19 @@ const Main = () => {
     setInput,
     input,
   } = useContext(Context);
+
+    useEffect(() => {
+      const savedTheme = localStorage.getItem("theme") || "light";
+      setTheme(savedTheme);
+      document.body.className = savedTheme; // Apply saved theme to body
+    }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    document.body.className = newTheme; // Apply theme to body
+    localStorage.setItem("theme", newTheme); // Save preference
+  };
 
   const handleCartClick = (prompt) => {
     setInput(prompt);
@@ -29,7 +43,12 @@ const Main = () => {
     <div className="main">
       <div className="nav">
         <p>Gemini</p>
-        <img src={assets.designer_1} alt="" />
+        <div>
+          <img src={assets.logo} alt="" />
+          <button onClick={toggleTheme} className="theme-toggle">
+            {theme === "light" ? "🌙" : "☀️"}
+          </button>
+        </div>
       </div>
       <div className="main-container">
         {!showResult ? (
@@ -49,7 +68,10 @@ const Main = () => {
                   )
                 }
               >
-                <p>Suggest beautiful place to see on an upcoming road Trip</p>
+                <p>
+                  Recommend breathtaking destinations for my next road trip
+                  adventure.
+                </p>
                 <img src={assets.compass_icon} alt="" />
               </div>
               <div
@@ -60,7 +82,10 @@ const Main = () => {
                   )
                 }
               >
-                <p>What’s the reaction to and impact of autonomous vehicles</p>
+                <p>
+                  How are self-driving cars influencing the future of
+                  transportation?
+                </p>
                 <img src={assets.message_icon} alt="" />
               </div>
               <div
@@ -72,8 +97,7 @@ const Main = () => {
                 }
               >
                 <p>
-                  Explain the key rules of rugby. Start with the basics and go
-                  step-by-step.
+                  Suggest hidden gems for an unforgettable road trip experience.
                 </p>
                 <img src={assets.bulb_icon} alt="" />
               </div>
@@ -85,8 +109,7 @@ const Main = () => {
                   )
                 }
               >
-                Place
-                <p>Help me get organized with a list of 10 tips</p>
+                <p>What are the key principles of rugby, starting from the ground up?</p>
                 <img src={assets.bulb_icon} alt="" />
               </div>
             </div>

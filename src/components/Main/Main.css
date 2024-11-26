@@ -13,10 +13,40 @@
     padding: 20px;
     color: rgb(89, 90, 90);
 }
+.nav div {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
 
 .nav img {
     width: 40px;
     border-radius: 50%;
+}
+.nav .theme-toggle {
+  width: 40px; 
+  height: 40px;
+  border: none;
+  border-radius: 100%; 
+  background-color: #5b5c5d; 
+  font-size: 1.7rem; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.theme-toggle:hover {
+  background-color: #4a4a4b; /* Darker shade on hover */
+  transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+body.dark .theme-toggle {
+  background-color: #444444; /* Dark mode button background */
+}
+
+body.dark .theme-toggle:hover {
+  background-color: #222222; /* Darker hover effect in dark mode */
 }
 
 .main-container {
@@ -172,4 +202,45 @@
     .search-box div{
         gap: 5px;
     }
+}
+
+/* Main.css */
+
+/* Default (Light) Theme */
+body.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Dark Theme */
+body.dark {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Common Styles */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f4f4f4;
+}
+
+.nav .theme-toggle {
+  cursor: pointer;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+body.dark .nav {
+  background-color: #333333;
+}
+
+.content {
+  padding: 20px;
+  text-align: center;
 }
